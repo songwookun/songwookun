@@ -7,6 +7,8 @@
 
 <img src="https://komarev.com/ghpvc/?username=songwookun&label=PROFILE+VIEWS&color=7c3aed&style=flat" alt="views" />
 
+**한국어** · [English](https://github.com/songwookun/songwookun/blob/main/README.en.md)
+
 </div>
 
 ```python
