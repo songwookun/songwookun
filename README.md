@@ -9,85 +9,52 @@
 
 </div>
 
----
-
 ```python
 class Woogeun(AIEngineer):
-    role    = "AI Application Engineer"
-    stack   = ["Python", "FastAPI", "LLM · RAG · Agents · VLM", "Async", "Redis"]
-    motto   = "Trust, but measure."
+    motto = "Trust, but measure."
 
     def build(self, task):
-        output = self.llm(task)                  # 1. AI의 능력은 최대한 끌어올리고
-        evidence = self.measure(output)          # 2. 그럴듯함 대신 실측과 출처로 재본 뒤
-        return output if self.verify(evidence) else self.abstain()   # 3. 믿을 수 있을 때만 내보낸다
+        output = self.llm(task)                     # AI의 능력은 최대한 끌어올리고
+        evidence = self.measure(output)             # 그럴듯함 대신 실측과 출처로 재본 뒤
+        return output if self.verify(evidence) else self.abstain()   # 믿을 수 있을 때만 내보낸다
 ```
 
-## 🧭 How I build with AI
+**`Generate → Doubt → Measure → Verify → Ship`** &nbsp;(근거가 약하면 **Abstain**)
 
-```mermaid
-flowchart LR
-    G["🤖 Generate<br/>LLM · VLM · Agent"] --> D{"🔍 Doubt<br/>정말 맞나?"}
-    D --> M["📏 Measure<br/>실측 · 교차검증 · 출처"]
-    M --> V{"✅ Verify<br/>기준 통과?"}
-    V -->|yes| S["🚀 Ship"]
-    V -->|no| A["🙅 Abstain<br/>모르면 모른다고"]
-    A -. 개선 .-> G
-```
+- **능력은 끌어올린다** — 검색 그라운딩 · RAG · 에이전트 · 멀티 모델
+- **결과는 의심한다** — "실측", "정확도 높음"을 그대로 받지 않고 직접 재본다
+- **근거를 남긴다** — 출처 · 점수 · trace를 결과와 함께 저장한다
+- **모르면 멈춘다** — 그럴듯한 답 대신 "없다"고 말하게 만든다
 
-- **능력은 끌어올린다** — 검색 그라운딩, RAG, 에이전트, 멀티 모델로 AI가 할 수 있는 일을 넓힌다
-- **결과는 의심한다** — "실측", "정확도 높음" 같은 말을 그대로 받지 않고 직접 재본다
-- **근거를 남긴다** — 출처, 점수, trace를 결과와 함께 저장해서 나중에도 검증할 수 있게 한다
-- **모르면 멈춘다** — 근거가 약하면 그럴듯한 답 대신 "없다"고 말하는 시스템을 만든다
-
-## 🚀 Featured Projects
-
-| Project | AI가 하는 일 | 내가 의심하고 확인한 것 |
-|---|---|---|
-| ⌚ [**wrist-rag**](https://github.com/songwookun/wrist-rag) | 애플워치에 말하면 검색해서 노트를 쓰고, 내 노트로만 답하는 RAG | 출처 없는 노트는 지어낸 것일 수 있다 → **실제 검색어와 원문 URL을 노트에 남김**. 실제 유료 키로 매일 사용 중 |
-| 🖼️ [**img-vlm-extractor**](https://github.com/songwookun/img-vlm-extractor) | VLM이 이미지에서 값을 추출 | 뽑는 것보다 **믿어도 되는지가 문제** → VLM 교차검증 + 코드 검산으로 신뢰도 판정 |
-| 📚 [**md-rag-chatbot**](https://github.com/songwookun/md-rag-chatbot) | 개인 지식 RAG 챗봇 (FastAPI · Gemini · Pinecone) | AI가 "실측"이라 써둔 튜닝값을 **직접 다시 재고**, 언제 답을 보류할지 실험으로 결정 |
-| 🧪 [**agent-eval-lab**](https://github.com/songwookun/agent-eval-lab) | AI 에이전트가 도구를 쓰며 작업 수행 | 같은 프롬프트에도 매번 다르게 움직인다 → **4축 평가 + OpenTelemetry trace**로 행동을 숫자로 측정 |
-
-<details>
-<summary><b>More</b></summary>
-
-- [**used-deal-analyzer**](https://github.com/songwookun/used-deal-analyzer) — 쇼핑 트렌드 + 시세 분석 파이프라인 (큐 기반 비동기 처리 + LLM)
-- [**ai-corp**](https://github.com/songwookun/ai-corp) — 8명의 AI 직원이 협업하는 멀티 에이전트 가상 회사 시뮬레이터
-
-</details>
-
-## 🛠️ Tech Stack
-
-**AI / LLM**
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=flat-square&logo=googlegemini&logoColor=white)
 ![RAG](https://img.shields.io/badge/RAG-7C3AED?style=flat-square)
 ![Agents](https://img.shields.io/badge/AI%20Agents-7C3AED?style=flat-square)
 ![VLM](https://img.shields.io/badge/VLM-7C3AED?style=flat-square)
 ![Pinecone](https://img.shields.io/badge/Pinecone-000000?style=flat-square&logo=pinecone&logoColor=white)
 ![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-425CC7?style=flat-square&logo=opentelemetry&logoColor=white)
-
-**Backend**
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
-![Asyncio](https://img.shields.io/badge/Async-3776AB?style=flat-square&logo=python&logoColor=white)
-![Pytest](https://img.shields.io/badge/pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
-
-**Infra / Tools**
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Notion API](https://img.shields.io/badge/Notion%20API-000000?style=flat-square&logo=notion&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 
-## 📊 Languages
+<details>
+<summary><b>🔍 프로젝트마다 무엇을 의심하고 확인했나</b></summary>
+
+| Project | AI가 하는 일 | 내가 의심하고 확인한 것 |
+|---|---|---|
+| ⌚ [**wrist-rag**](https://github.com/songwookun/wrist-rag) | 애플워치에 말하면 검색해서 노트를 쓰고, 내 노트로만 답하는 RAG | 출처 없는 노트는 지어낸 것일 수 있다 → **실제 검색어와 원문 URL을 노트에 남김**. 실제 유료 키로 매일 사용 중 |
+| 🖼️ [**img-vlm-extractor**](https://github.com/songwookun/img-vlm-extractor) | VLM이 이미지에서 값을 추출 | 뽑는 것보다 **믿어도 되는지가 문제** → VLM 교차검증 + 코드 검산으로 신뢰도 판정 |
+| 📚 [**md-rag-chatbot**](https://github.com/songwookun/md-rag-chatbot) | 개인 지식 RAG 챗봇 | AI가 "실측"이라 써둔 튜닝값을 **직접 다시 재고**, 언제 답을 보류할지 실험으로 결정 |
+| 🧪 [**agent-eval-lab**](https://github.com/songwookun/agent-eval-lab) | AI 에이전트가 도구를 쓰며 작업 수행 | 같은 프롬프트에도 매번 다르게 움직인다 → **4축 평가 + OpenTelemetry trace**로 행동을 숫자로 측정 |
+
+More: [used-deal-analyzer](https://github.com/songwookun/used-deal-analyzer) (큐 기반 비동기 + LLM 시세 분석) · [ai-corp](https://github.com/songwookun/ai-corp) (8명의 AI 직원 멀티 에이전트 시뮬레이터)
+
+</details>
+
+<details>
+<summary><b>📊 Languages</b></summary>
 
 <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=songwookun&layout=compact&langs_count=4&hide=shaderlab,html,css,c%23,asp.net,shell&exclude_repo=Survivor,BoomDash_2025,NetworkOmok,DragonFlightImitation,Play_Room_Studio,C-Study,ProblemSol2024,Hybrid-application&theme=transparent&hide_border=true&title_color=7c3aed" alt="top languages" />
 
----
-
-<div align="center">
-
-**Trust, but measure.** · 믿되, 재본다.
-
-</div>
+</details>
